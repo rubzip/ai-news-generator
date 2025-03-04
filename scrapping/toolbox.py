@@ -110,8 +110,9 @@ class NewsOfTheDay:
         news_list = self.scrapper.scrape_news(rss_url_list)
         if shuffle_news:
             random.shuffle(news_list)
-        with open('output/news_list.json', 'w', encoding="utf-8") as f:
-            json.dump(news_list, f, ensure_ascii=False, indent=4)
+
+        with open('output/news_list.json', 'w', encoding="utf-8") as f: # delete in production
+            json.dump(news_list, f, ensure_ascii=False, indent=4)       # delete in production
 
         news_of_day = self.generator.generate_content(news_list)
         news_of_day_parsed = self.parser.parse(news_of_day)
