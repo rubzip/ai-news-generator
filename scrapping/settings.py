@@ -1,3 +1,6 @@
+from dotenv import load_dotenv
+import os
+
 rss_url_list = [
     # https://news.google.com/headlines/section/topic/NATION?hl=es&gl=ES&ceid=ES:es
     "https://rss.app/feeds/pJtCWZLcLPUtlICC.xml",
@@ -12,12 +15,14 @@ rss_url_list = [
     "https://rss.app/feeds/1pcG6ARQfeV8z63e.xml"
 ]
 
-api_key = ""
+load_dotenv()
+api_key = os.getenv("API_KEY")
+
 summary_prompt_path = "prompt/summary_prompt.txt"
 generator_prompt_path = "prompt/generator_prompt.txt"
 model_name = "gemini-1.5-flash"
 
-max_entries = 10
+max_entries = 2
 sleep_time = 10
 
 with open(summary_prompt_path, "r") as f:

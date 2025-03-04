@@ -130,42 +130,13 @@ div[style="text-align: center;"] code:hover {
 
 /* Sources section */
 .sources-title {
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    user-select: none;
-    margin-bottom: 1em;
     font-weight: 600;
     color: var(--primary-color);
-}
-
-.sources-title::before {
-    content: "";
-    display: inline-block;
-    width: 0;
-    height: 0;
-    border-left: 8px solid var(--primary-color);
-    border-top: 6px solid transparent;
-    border-bottom: 6px solid transparent;
-    margin-right: 8px;
-    transition: transform 0.3s ease;
-}
-
-.sources-title.open::before {
-    transform: rotate(90deg);
+    margin-bottom: 1em;
 }
 
 .sources-list {
-    max-height: 0;
-    overflow: hidden;
-    opacity: 0;
-    transition: max-height 0.5s ease-out, opacity 0.3s ease-out;
-}
-
-.sources-list.open {
-    max-height: 2000px;
-    opacity: 1;
-    transition: max-height 0.5s ease-in, opacity 0.3s ease-in;
+    margin-bottom: 2em;
 }
 
 ul {
@@ -178,14 +149,7 @@ ul li {
     margin: 0.5em 0;
     padding: 0.5em;
     border-radius: 4px;
-    opacity: 0;
-    transform: translateY(-10px);
-    transition: opacity 0.3s ease, transform 0.3s ease, background-color 0.2s ease;
-}
-
-.sources-list.open ul li {
-    opacity: 1;
-    transform: translateY(0);
+    transition: background-color 0.2s ease;
 }
 
 ul li:hover {
