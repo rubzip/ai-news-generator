@@ -33,8 +33,8 @@ rss_url_list = [
 load_dotenv()
 api_key = os.getenv("API_KEY")
 
-summary_prompt_path = "prompt/summary_prompt.txt"
-generator_prompt_path = "prompt/generator_prompt.txt"
+summary_prompt_path = "prompts/summary_prompt.txt"
+generator_prompt_path = "prompts/generator_prompt.txt"
 model_name = "gemini-2.0-flash-lite"
 
 max_entries = 2

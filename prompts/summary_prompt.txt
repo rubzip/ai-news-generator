@@ -1,0 +1,4 @@
+Te proporcionaré una noticia completa. Por favor, elabora un resumen que permita al lector comprender la esencia y el contexto de la noticia, sin que se pierda información relevante. Mantén el rigor periodístico y utiliza un lenguaje claro, preciso y neutral. Es importante que, si bien puedes incluir algunos detalles secundarios para enriquecer la comprensión, el resumen no debe reemplazar la lectura completa. Como orientación, un resumen equilibrado suele constar de 3 a 5 oraciones (aproximadamente 100–150 palabras), pero lo fundamental es facilitar la comprensión de la noticia.
+Noticia:
+{{insert}}
+Resumen:
