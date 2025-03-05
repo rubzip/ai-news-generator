@@ -121,7 +121,7 @@ class ContentGenerator:
             print(f"Error generating content: {e}")
             return ""
 
-class ContentGenerator:
+class ContentGenerator2:
     def __init__(self, api_caller, generator_prompt: str, attributes: list = ["title", "url", "summary"]):
         self.api_caller = api_caller
         self.generator_prompt = generator_prompt

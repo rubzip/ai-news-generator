@@ -37,7 +37,7 @@ summary_prompt_path = "prompt/summary_prompt.txt"
 generator_prompt_path = "prompt/generator_prompt.txt"
 model_name = "gemini-2.0-flash-lite"
 
-max_entries = 5
+max_entries = 2
 sleep_time = 10
 
 with open(summary_prompt_path, "r") as f:
