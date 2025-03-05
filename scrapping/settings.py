@@ -27,7 +27,7 @@ rss_url_list = [
 
     "https://es.wired.com/feed/ciencia/rss",
 
-    "https://feeds.bloomberg.com/technology/news.rss"
+    "https://feeds.bloomberg.com/technology/news.rss",
 ]
 
 load_dotenv()
