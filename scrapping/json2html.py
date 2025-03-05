@@ -32,7 +32,7 @@ sources = data.get("sources", [])
 if sources:
     html_content += "<h2>Fuentes</h2>\n"
     html_content += "<ul>\n"
-    for source, url in sources.items():
+    for source, url in sources:
         html_content += f'<li><a href="{url}">{source}</a></li>\n'
     html_content += "</ul>\n"
 html_content += '</body></html>'

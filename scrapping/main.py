@@ -4,7 +4,6 @@ import json
 
 from settings import api_key, rss_url_list, summary_prompt, generator_prompt, max_entries, sleep_time, model_name
 
-
 summarizer = NewsSummarizer(api_key=api_key, summary_prompt=summary_prompt)
 scrapper = NewsScrapper(summarizer=summarizer, max_entries=max_entries, sleep_time=sleep_time)
 generator = ContentGenerator(api_key=api_key, generator_prompt=generator_prompt, model_name=model_name)

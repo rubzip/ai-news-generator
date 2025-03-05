@@ -10,6 +10,19 @@ import json
 import random
 
 
+class GoogleLLMAPI:
+    def __init__(self, api_key: str, model_name: str = "gemini-1.5-flash"):
+        genai.configure(api_key=api_key)
+        self.model = genai.GenerativeModel(model_name)
+    
+    def __call__(self, prompt: str) -> str:
+        try:
+            response = self.model.generate_content(prompt)
+            return response.text
+        except Exception as e:
+            print(f"Error generating content: {e}")
+            return ""
+
 class NewsSummarizer:
     def __init__(self, api_key: str, summary_prompt: str, model_name: str = "gemini-1.5-flash"):
         genai.configure(api_key=api_key)
@@ -25,6 +38,15 @@ class NewsSummarizer:
         except Exception as e:
             print(f"Error generating content: {e}")
             return ""
+
+class NewsSummarizer2:
+    def __init__(self, api_caller, summary_prompt: str):
+        self.api_caller = api_caller
+        self.summary_prompt = summary_prompt
+    
+    def summarize(self, new: str) -> str:
+        prompt = self.summary_prompt.replace("{{insert}}", new)
+        return self.api_caller(prompt)
 
 class NewsScrapper:
     def __init__(self, summarizer: NewsSummarizer, max_entries: int=100, sleep_time: int=5):
@@ -98,6 +120,18 @@ class ContentGenerator:
         except Exception as e:
             print(f"Error generating content: {e}")
             return ""
+
+class ContentGenerator:
+    def __init__(self, api_caller, generator_prompt: str, attributes: list = ["title", "url", "summary"]):
+        self.api_caller = api_caller
+        self.generator_prompt = generator_prompt
+        self.attributes = attributes
+    
+    def generate_content(self, news: list[dict[str, str]]) -> str:
+        filtered_news = [{att: new.get(att, "") for att in self.attributes} for new in news]
+        news_string = "\n".join(map(str, filtered_news))
+        prompt = self.generator_prompt.replace("{{insert}}", news_string)
+        return self.api_caller(prompt)
 
 class NewsOfTheDay:
     def __init__(self, scrapper: NewsScrapper, generator: ContentGenerator):
