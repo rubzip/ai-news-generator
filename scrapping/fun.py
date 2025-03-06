@@ -5,17 +5,17 @@ import feedparser
 from bs4 import BeautifulSoup
 import google.generativeai as genai
 
-from langchain_core.output_parsers import JsonOutputParser
 import json
 import random
+from langchain_core.output_parsers import JsonOutputParser
 
 import abc
 from string import Template
 
+
 class LLMService(abc.ABC):
     @classmethod
     def generate_text(self, prompt: str) -> str: ...
-
 
 class GoogleLLMService(LLMService):
     def __init__(self, api_key: str, model_name: str = "gemini-1.5-flash"):
@@ -45,37 +45,32 @@ class Scrapper:
         self.sleep_time = sleep_time
 
     def scrape_news(self, rss_url_list: list[str]) -> list[dict[str, str]]:
-        news_url_list = self._get_list_of_news_from_list(rss_url_list)
-        news_list = self._fetch_news_from_list(news_url_list)
+        news_url_list = self._get_urls_from_rss_list(rss_url_list)
+        news_list = self._fetch_from_list(news_url_list)
         return news_list
     
-    def _get_list_of_news_from_list(self, rss_url_list: list[str]) -> list[dict[str, str]]:
+    def _get_urls_from_rss_list(self, rss_url_list: list[str]) -> list[dict[str, str]]:
         url_news = []
         for rss_url in rss_url_list:
-            url_news.extend(self._get_list_of_news(rss_url))
+            feed = feedparser.parse(rss_url)
+            for entry in feed.entries[:self.max_entries]:
+                url_news.append({
+                    "title": entry.title,
+                    "url": entry.link,
+                    "published": entry.published
+                })
         return url_news
     
-    def _get_list_of_news(self, rss_url: str) -> list[dict[str, str]]:
-        feed = feedparser.parse(rss_url)
-        url_news = []
-        for entry in feed.entries[:self.max_entries]:
-            url_news.append({
-                "title": entry.title,
-                "url": entry.link,
-                "published": entry.published
-            })
-        return url_news
-    
-    def _fetch_news_from_list(self, news_list: list[dict[str, str]]) -> list[dict[str, str]]:
+    def _fetch_from_list(self, news_list: list[dict[str, str]]) -> list[dict[str, str]]:
         news_list_with_content = []
         for news in news_list:
-            content = self._fetch_news(news["url"])
+            content = self._fetch(news["url"])
             news_list_with_content.append({**news, "content": content})
             time.sleep(self.sleep_time)
 
         return news_list_with_content
 
-    def _fetch_news(self, url: str) -> str:
+    def _fetch(self, url: str) -> str:
         try:
             response = requests.get(url)
             if response.status_code == 200:
@@ -96,6 +91,20 @@ class Orchestrator:
         self.parser = JsonOutputParser()
     
     def run(self, rss_url_list: list[str], shuffle_news: bool=True) -> dict:
+        """
+        Executes the complete news summarization pipeline:
+        1. Scrapes news from RSS feeds (titles, URLs, and full content)
+        2. Generates AI-powered summaries for each article
+        3. Creates a structured daily digest using another AI model
+
+        Args:
+            rss_url_list (list[str]): List of RSS feed URLs
+            shuffle_news (bool): Whether to randomize news order. Defaults to True
+
+        Returns:
+            dict: JSON-structured daily summary with keywords, content sections, and sources
+        """
+        
         # Scrapping news
         news_list = self.scrapper.scrape_news(rss_url_list)
         if shuffle_news:

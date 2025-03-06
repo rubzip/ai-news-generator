@@ -51,7 +51,7 @@ Formato de salida esperado (JSON):
     "content": [
         {
             "category": "h1",
-            "text": Título significativo del día y la fecha" 
+            "text": Título significativo del día. Sin mencionar la fecha." 
         },
         {
             "category": "p",
