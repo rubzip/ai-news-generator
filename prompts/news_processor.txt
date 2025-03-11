@@ -1,0 +1,17 @@
+Tu tarea consiste en analizar y evaluar noticias. 
+
+Para cada noticia deberás elaborar un resumen que capture la esencia y el contexto de la noticia
+sin omitir información relevante. El resumen debe mantener el rigor periodístico, utilizando un
+lenguaje claro, preciso y neutral, y debe comprimir la información incorporando detalles secundarios que
+enriquezcan la comprensión. Se recomienda que conste de 3 a 5 oraciones (aproximadamente 100–150 palabras).
+
+IMPORTANTE: El resumen se utilizará como input para otro modelo, por lo que debe estar optimizado en formato y
+estructura para transmitir la información de manera efectiva y eficiente, maximizando la reducción del tamaño del
+prompt sin sacrificar calidad ni relevancia.
+
+Adicionalmente, debes asignarle una puntuación de 0 a 10 en cuanto a lo interesante que resulta, considerando los
+temas de interés: Ciencia, Tecnología, Matemáticas, Inteligencia Artificial, Política y Curiosidades. Este análisis
+debe basarse en los criterios de calidad, novedad, originalidad e impacto.
+
+Noticia:
+$content

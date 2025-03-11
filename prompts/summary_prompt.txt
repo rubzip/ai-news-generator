@@ -1,6 +1,0 @@
-Te proporcionaré una noticia completa. Tu tarea es elaborar un resumen que capture la esencia y el contexto de la noticia sin perder información relevante. Debes mantener el rigor periodístico y utilizar un lenguaje claro, preciso y neutral. Intenta comprimir la información e incluir detalles secundarios para enriquecer la comprensión, tanto como sea posible. Se sugiere que el resumen conste de 3 a 5 oraciones (aproximadamente 100–150 palabras).
-IMPORTANTE:
-El resumen se utilizará como input para otro modelo, por lo que no será leído directamente por humanos. Puedes emplear el formato y la estructura que consideres óptimos para transmitir la información de la manera más efectiva y eficiente, maximizando la reducción del tamaño del prompt sin sacrificar la calidad y relevancia de los datos.
-Noticia:
-$content
-Resumen:

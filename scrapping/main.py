@@ -1,15 +1,21 @@
 import json
-from fun import GoogleLLMService, Summarizer, Scrapper, Orchestrator
+from fun.LLM import GoogleLLMService, JsonGenerator
+from fun.BaseModels import ProcessNews, GenerateNews
+from fun.Scrapper import Scrapper
+from fun.Orchestrator import Orchestrator
 
-from settings import api_key, rss_url_list, summary_prompt, generator_prompt, max_entries, sleep_time, model_name
+from settings import api_key, rss_url_list, processor_prompt, aggregator_prompt, max_entries, sleep_time, model_name
 
 if __name__ == "__main__":
-    llm_service = GoogleLLMService(api_key, model_name)
-    summarizer = Summarizer(llm_service, summary_prompt)
-    news_aggregator = Summarizer(llm_service, generator_prompt)
+    llm_service_processor = GoogleLLMService(api_key, ProcessNews, model_name)
+    llm_service_aggregator = GoogleLLMService(api_key, GenerateNews, model_name)
+    
+    processor = JsonGenerator(llm_service_processor, processor_prompt)
+    aggregator = JsonGenerator(llm_service_aggregator, aggregator_prompt)
+
     scrapper = Scrapper(max_entries, sleep_time)
 
-    orchestrator = Orchestrator(scrapper, summarizer, news_aggregator)
+    orchestrator = Orchestrator(scrapper, processor, aggregator)
     news_summary_json = orchestrator.run(rss_url_list)
 
     with open('output/news_of_day.json', 'w', encoding="utf-8") as f:
