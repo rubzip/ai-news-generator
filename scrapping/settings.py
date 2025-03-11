@@ -1,5 +1,5 @@
-from dotenv import load_dotenv
 import os
+from dotenv import load_dotenv
 
 rss_url_list = [
     # https://news.google.com/headlines/section/topic/NATION?hl=es&gl=ES&ceid=ES:es
@@ -7,10 +7,10 @@ rss_url_list = [
     
     # https://news.google.com/headlines/section/topic/TECHNOLOGY?hl=es&gl=ES&ceid=ES:es
     "https://rss.app/feeds/LXWIy0QwhgozSYBT.xml",
-    
+
     # https://news.google.com/headlines/section/topic/BUSINESS?hl=es&gl=ES&ceid=ES:es
     #"https://rss.app/feeds/wrafKnrRQmcvW9w7.xml",
-    
+
     # https://news.google.com/headlines/section/topic/SCIENCE?hl=es&gl=ES&ceid=ES:es
     "https://rss.app/feeds/1pcG6ARQfeV8z63e.xml",
 
@@ -37,7 +37,7 @@ summary_prompt_path = "prompts/summary_prompt.txt"
 generator_prompt_path = "prompts/generator_prompt.txt"
 model_name = "gemini-2.0-flash-lite"
 
-max_entries = 2
+max_entries = 4
 sleep_time = 10
 
 with open(summary_prompt_path, "r") as f:

@@ -1,9 +1,9 @@
-from fun import GoogleLLMService, Summarizer, Scrapper, Orchestrator
 import json
+from fun import GoogleLLMService, Summarizer, Scrapper, Orchestrator
 
 from settings import api_key, rss_url_list, summary_prompt, generator_prompt, max_entries, sleep_time, model_name
 
-if __name__=="__main__":
+if __name__ == "__main__":
     llm_service = GoogleLLMService(api_key, model_name)
     summarizer = Summarizer(llm_service, summary_prompt)
     news_aggregator = Summarizer(llm_service, generator_prompt)
