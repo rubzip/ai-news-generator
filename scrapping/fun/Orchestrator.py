@@ -63,5 +63,5 @@ class Orchestrator:
 
         return {
             **daily_summary,
-            "date": date.today()
+            "date": date.today().isoformat()
             }
