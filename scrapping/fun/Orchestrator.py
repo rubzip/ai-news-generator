@@ -3,6 +3,7 @@ from .Scrapper import Scrapper
 import random
 import time
 import json
+from datetime import date
 
 class Orchestrator:
     def __init__(self, scrapper: Scrapper, news_processor: JsonGenerator, news_aggregator: JsonGenerator, attributes: list = ["title", "url", "summary", "score"], summary_time=10, number_of_news=8):
@@ -60,4 +61,7 @@ class Orchestrator:
             {"content": news_list_to_ingest_str}
         )
 
-        return daily_summary
+        return {
+            **daily_summary,
+            "date": date.today()
+            }
